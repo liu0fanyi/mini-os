@@ -1,0 +1,10 @@
+[package]
+name = "axstd"
+edition = "2024"
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+categories.workspace = true
+
+[dependencies]
+axhal = { workspace = true }

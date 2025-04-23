@@ -1,0 +1,10 @@
+[package]
+name = "axhal"
+edition = "2024"
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+categories.workspace = true
+
+[dependencies]
+linkme = "0.3"

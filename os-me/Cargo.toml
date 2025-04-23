@@ -1,15 +1,13 @@
-[package]
-name = "os-me"
+[workspace]
+resolver = "2"                              #启用 依赖解析器 v2，能更智能地处理 features，推荐新项目使用。
+members = ["example_now", "axstd", "axhal"]
+
+[workspace.package]
 version = "0.1.0"
-edition = "2024"
+authors = ["liu_fanyi <liu_fanyi@hotmail.com>"]
+license = "GPL-3.0-or-later OR Apache-2.0 OR MulanPSL-2.0"
+categories = ["os", "no-std"]
 
-
-# the profile used for `cargo build`
-[profile.dev]
-panic = "abort" # disable stack unwinding on panic
-
-# the profile used for `cargo build --release`
-[profile.release]
-panic = "abort" # disable stack unwinding on panic
-
-[dependencies]
+[workspace.dependencies]
+axstd = { path = "axstd" }
+axhal = { path = "axhal" }
