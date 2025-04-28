@@ -1,36 +1,40 @@
 #![no_std]
 
 use core::fmt::{self, Write};
-
 struct Stdout;
 
-const SYSCALL_EXIT: usize = 93;
-const SYSCALL_WRITE: usize = 64;
+const SBI_CONSOLE_PUTCHAR: usize = 1;
+const SBI_SHUTDOWN: usize = 8;
 
-pub fn sys_write(fd: usize, buffer: &[u8]) -> isize {
-    syscall(SYSCALL_WRITE, [fd, buffer.as_ptr() as usize, buffer.len()])
+pub fn console_putchar(c: usize) {
+    sbi_call(SBI_CONSOLE_PUTCHAR, c, 0, 0);
 }
 
-fn syscall(id: usize, args: [usize; 3]) -> isize {
+pub fn shutdown() -> ! {
+    sbi_call(SBI_SHUTDOWN, 0, 0, 0);
+    panic!("It should shutdown!");
+}
+
+fn sbi_call(which: usize, arg0: usize, arg1: usize, arg2: usize) -> isize {
     let mut ret;
     unsafe {
         core::arch::asm!(
             "ecall",
-            inlateout("x10") args[0] => ret,
-            in("x11") args[1],
-            in("x12") args[2],
-            in("x17") id,
+            inlateout("x10") arg0 => ret,
+            in("x11") arg1,
+            in("x12") arg2,
+            in("x16") 0,
+            in("x17") which,
         );
     }
     ret
 }
 
-pub fn sys_exit(xstate: i32) -> isize {
-    syscall(SYSCALL_EXIT, [xstate as usize, 0, 0])
-}
 impl Write for Stdout {
     fn write_str(&mut self, s: &str) -> fmt::Result {
-        sys_write(1, s.as_bytes());
+        for c in s.chars() {
+            console_putchar(c as usize);
+        }
         Ok(())
     }
 }

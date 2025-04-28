@@ -1,0 +1,12 @@
+[package]
+name = "axlog"
+edition = "2024"
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+categories.workspace = true
+
+[dependencies]
+log = "0.4"
+axstd = { workspace = true }
+axhal = { workspace = true }

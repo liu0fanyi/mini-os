@@ -1,6 +1,6 @@
 [workspace]
-resolver = "2"                              #启用 依赖解析器 v2，能更智能地处理 features，推荐新项目使用。
-members = ["example_now", "axstd", "axhal"]
+resolver = "2"                                       #启用 依赖解析器 v2，能更智能地处理 features，推荐新项目使用。
+members = ["example_now", "axstd", "axhal", "axlog"]
 
 [workspace.package]
 version = "0.1.0"
@@ -11,3 +11,4 @@ categories = ["os", "no-std"]
 [workspace.dependencies]
 axstd = { path = "axstd" }
 axhal = { path = "axhal" }
+axlog = { path = "axlog" }

@@ -6,14 +6,15 @@ authors.workspace = true
 license.workspace = true
 categories.workspace = true
 
-# the profile used for `cargo build`
-[profile.dev]
-panic = "abort" # disable stack unwinding on panic
+# # the profile used for `cargo build`
+# [profile.dev]
+# panic = "abort" # disable stack unwinding on panic
 
-# the profile used for `cargo build --release`
-[profile.release]
-panic = "abort" # disable stack unwinding on panic
+# # the profile used for `cargo build --release`
+# [profile.release]
+# panic = "abort" # disable stack unwinding on panic
 
 [dependencies]
 axstd = { workspace = true }
 axhal = { workspace = true }
+axlog = { workspace = true }
