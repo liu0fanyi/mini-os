@@ -2,15 +2,15 @@ rustc --version --verbose
 cargo run --target riscv64gc-unknown-none-elf
 cargo build --target riscv64gc-unknown-none-elf
 
-file target/riscv64gc-unknown-none-elf/debug/os-me
-rust-readobj -h target/riscv64gc-unknown-none-elf/debug/os-me
-rust-objdump -S target/riscv64gc-unknown-none-elf/debug/os-me
+file target/riscv64gc-unknown-none-elf/debug/mini-os
+rust-readobj -h target/riscv64gc-unknown-none-elf/debug/mini-os
+rust-objdump -S target/riscv64gc-unknown-none-elf/debug/mini-os
 
 
 # new
 cargo build --release
 
-rust-objcopy --binary-architecture=riscv64 target/riscv64gc-unknown-none-elf/release/example-test --strip-all -O binary target/riscv64gc-unknown-none-elf/release/os.bin
+rust-objcopy --binary-architecture=riscv64 target/riscv64gc-unknown-none-elf/release/example-now --strip-all -O binary target/riscv64gc-unknown-none-elf/release/os.bin
 
 # 普通qemu
 qemu-system-riscv64 -machine virt -nographic -bios bootloader/rustsbi-qemu.bin -device loader,file=target/riscv64gc-unknown-none-elf/release/os.bin,addr=0x80200000
@@ -30,4 +30,4 @@ info symbols
 
 disassemble _start
 
-file target/riscv64gc-unknown-none-elf/debug/example-test
+file target/riscv64gc-unknown-none-elf/debug/example-now

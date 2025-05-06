@@ -60,7 +60,8 @@ pub fn rust_main() -> ! {
         boot_stack_top as usize, boot_stack_lower_bound as usize
     );
     error!("[kernel] .bss [{:#x}, {:#x})", sbss as usize, ebss as usize);
-    shutdown()
+    // shutdown()
+    loop {}
 }
 
 #[panic_handler]
